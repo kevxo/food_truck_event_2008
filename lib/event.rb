@@ -30,13 +30,16 @@ class Event
   def total_inventory
     hash = {}
     @food_trucks.each do |trucks|
-      require 'pry' ; binding.pry
-      trucks.inventory.each do |item, value|
-        hash[item] ||= []
-        hash[item] << {
-          quantity: value,
-          food_trucks: [trucks]
-        }
+      trucks.inventory.each do |item, quantity|
+        if hash[item].nil?
+          hash[item] = {
+            quantity: quantity,
+            food_trucks: [trucks]
+          }
+        else
+          hash[item][:quantity] += quantity
+          hash[item][:food_trucks] << trucks
+        end
       end
     end
     hash
