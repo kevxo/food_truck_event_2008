@@ -44,4 +44,14 @@ class Event
     end
     hash
   end
+
+  def overstocked_items
+    array = []
+    total_inventory.map do |item, values|
+      if values[:quantity] > 50 && values[:food_trucks].count > 1
+        array << item
+      end
+    end
+    array
+  end
 end
