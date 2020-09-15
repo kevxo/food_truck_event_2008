@@ -26,4 +26,19 @@ class Event
     end
     array
   end
+
+  def total_inventory
+    hash = {}
+    @food_trucks.each do |trucks|
+      require 'pry' ; binding.pry
+      trucks.inventory.each do |item, value|
+        hash[item] ||= []
+        hash[item] << {
+          quantity: value,
+          food_trucks: [trucks]
+        }
+      end
+    end
+    hash
+  end
 end
