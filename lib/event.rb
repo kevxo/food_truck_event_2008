@@ -14,4 +14,16 @@ class Event
       truck.name
     end
   end
+
+  def food_trucks_that_sell(item)
+    array = []
+    @food_trucks.each do |truck|
+      truck.inventory.each do |key, value|
+        if key == item
+          array << truck
+        end
+      end
+    end
+    array
+  end
 end
